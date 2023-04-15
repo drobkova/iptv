@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <meta charset="UTF-8">
+    <title>IPTV</title>
+</head>
+<body>
+<h1>Movies</h1>
+<ul>
+    {% for movie in results %}
+    <li><a href="{{ movie.url }}">{{ movie.name }}</a></li>
+    {% endfor %}
+</ul>
+{% if previous %}
+<a class="btn btn-primary" href="{{ previous }}" role="button">Previous</a>
+{% endif %}
+{% if next %}
+<a class="btn btn-primary" href="{{ next }}" role="button">Next</a>
+{% endif %}
+</body>
+</html>

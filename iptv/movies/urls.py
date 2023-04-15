@@ -7,14 +7,14 @@ from rest_framework import renderers
 movie_list = MovieViewSet.as_view({
     'get': 'list',
     'post': 'create'
-})
+}, template_name='movie_list.html')
 
 movie_detail = MovieViewSet.as_view({
     'get': 'retrieve',
     'put': 'update',
     'patch': 'partial_update',
     'delete': 'destroy'
-})
+}, template_name='movie_detail.html')
 
 movie_highlight = MovieViewSet.as_view({
     'get': 'highlight'
