@@ -9,7 +9,7 @@ parser.add_argument('-u', '--update_data', action='store_true')
 args = parser.parse_args()
 
 
-def update_data(url):
+def update_data(url=None):
     if not url:
         url = "https://gist.githubusercontent.com/nextsux/f6e0327857c88caedd2dab13affb72c1/raw/04441487d90a0a05831835413f5942d58026d321/videos.json"
 
@@ -24,7 +24,16 @@ def update_data(url):
 
         fixtures.append(fixture)
         for field in entry:
-            fields.setdefault(field, set()).add(type(entry[field]))
+            fields[field] = ''
+            if not fields[field]:
+                if isinstance(entry[field], str):
+                    fields[field] = 'Char'
+                elif isinstance(entry[field], bool):
+                    fields[field] = 'Boolean'
+                elif isinstance(entry[field], int):
+                    fields[field] = 'Integer'
+                elif isinstance(entry[field], list) or isinstance(entry[field], dict):
+                    fields[field] = 'JSON'
 
     with open('fixtures/data.json', 'w') as data_file:
         data_file.write(json.dumps(fixtures, indent=2))
@@ -38,7 +47,11 @@ def init_data():
     maximum = max([len(x) for x in fields.keys()])
     for field in fields:
         offset = (maximum - len(field)) * ' '
-        print(f"{field}{offset} = models.JSONField(null=True, blank=True) #{fields[field]}")
+        field_type = fields[field] if fields[field] else 'JSON'
+        if field_type == 'Char':
+            print(f"{field}{offset} = models.{field_type}Field(max_length=100, null=True, blank=True)")
+        else:
+            print(f"{field}{offset} = models.{field_type}Field(null=True, blank=True)")
 
     print(fields.keys())
 

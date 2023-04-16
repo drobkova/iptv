@@ -1,22 +1,53 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-    <meta charset="UTF-8">
-    <title>IPTV</title>
-</head>
-<body>
-<h1>Movies</h1>
-<ul>
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container">
+  <h1>Movies</h1>
+</div>
+
+<div class="container">
+  <div class="dropdown">
+    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Order
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+      <a class="dropdown-item" href="/movies?ordering=name">Name asc</a>
+      <a class="dropdown-item" href="/movies?ordering=-name">Name desc</a>
+      <a class="dropdown-item" href="/movies?ordering=id">Id asc</a>
+      <a class="dropdown-item" href="/movies?ordering=-id">Id desc</a>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
     {% for movie in results %}
-    <li><a href="{{ movie.url }}">{{ movie.name }}</a></li>
+      <div class="col-sm-3">
+        <div class="card" style="width: 18rem;">
+          <img class="card-img-top" src="{{ movie.iconUri }}" alt="Icon of {{ name }}">
+          <div class="card-body">
+            <h5 class="card-title">{{ movie.name }}</h5>
+              {% if movie.description %}
+                <p class="card-text">{{ movie.description }}</p>
+              {% endif %}
+            <a href="{{ movie.url }}" class="btn btn-primary">Details</a>
+          </div>
+        </div>
+      </div>
     {% endfor %}
-</ul>
-{% if previous %}
-<a class="btn btn-primary" href="{{ previous }}" role="button">Previous</a>
-{% endif %}
-{% if next %}
-<a class="btn btn-primary" href="{{ next }}" role="button">Next</a>
-{% endif %}
-</body>
-</html>
+  </div>
+</div>
+<br>
+
+<div class="container">
+  {% if previous %}
+    <a class="btn btn-primary" href="{{ previous }}" role="button">Previous</a>
+  {% endif %}
+
+  {% if next %}
+    <a class="btn btn-primary" href="{{ next }}" role="button">Next</a>
+  {% endif %}
+</div>
+
+{% endblock content %}

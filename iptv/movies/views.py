@@ -1,9 +1,9 @@
 from rest_framework.decorators import api_view, action, renderer_classes
-from rest_framework.renderers import TemplateHTMLRenderer
+from rest_framework.renderers import TemplateHTMLRenderer, HTMLFormRenderer
 from rest_framework.response import Response
 from rest_framework.reverse import reverse
-from rest_framework import viewsets, renderers
-from django_filters import rest_framework as filters
+from rest_framework import viewsets, filters
+from django_filters.rest_framework import DjangoFilterBackend
 from movies.models import Movie
 from movies.serializers import MovieSerializer
 
@@ -11,20 +11,16 @@ from movies.serializers import MovieSerializer
 class MovieViewSet(viewsets.ModelViewSet):
     """
     This viewset automatically provides `list`, `create`, `retrieve`,
-    `update`, `destroy`, and `highlight` actions.
+    `update`, and `destroy` actions.
     """
     queryset = Movie.objects.all()
     serializer_class = MovieSerializer
-    renderer_classes = [TemplateHTMLRenderer]
+    #renderer_classes = [TemplateHTMLRenderer, HTMLFormRenderer]
     template_name = 'movie_list.html'
-    filter_backends = [filters.DjangoFilterBackend]
-    search_fields = ['name']
-
-    @action(detail=True, renderer_classes=[renderers.StaticHTMLRenderer])
-    def highlight(self, request, *args, **kwargs):
-        movie = self.get_object()
-        return Response(movie.highlighted)
-
+    filter_backends = [DjangoFilterBackend, filters.OrderingFilter]
+    ordering_fields = ['id', 'name', 'shortName', 'iconUri', 'manifestUri', 'source']
+    filterset_fields = ['id', 'name', 'shortName', 'iconUri', 'manifestUri', 'source', 'focus',
+                        'disabled']
 
 
 @api_view(['GET'])

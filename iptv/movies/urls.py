@@ -1,7 +1,6 @@
 from django.urls import path
 from rest_framework.urlpatterns import format_suffix_patterns
 from movies.views import MovieViewSet, api_root
-from rest_framework import renderers
 
 
 movie_list = MovieViewSet.as_view({
@@ -16,14 +15,9 @@ movie_detail = MovieViewSet.as_view({
     'delete': 'destroy'
 }, template_name='movie_detail.html')
 
-movie_highlight = MovieViewSet.as_view({
-    'get': 'highlight'
-}, renderer_classes=[renderers.StaticHTMLRenderer])
-
 
 urlpatterns = format_suffix_patterns([
     path('', api_root),
     path('movies/', movie_list, name='movie-list'),
     path('movies/<int:pk>/', movie_detail, name='movie-detail'),
-    path('movies/<int:pk>/highlight/', movie_highlight, name='movie-highlight'),
 ])

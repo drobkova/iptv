@@ -3,33 +3,33 @@ from django.db import models
 
 # Create your models here.
 class Movie(models.Model):
-    name = models.JSONField(null=True, blank=True)  # {<class 'str'>}
-    shortName = models.JSONField(null=True, blank=True)  # {<class 'str'>}
-    iconUri = models.JSONField(null=True, blank=True)  # {<class 'str'>}
-    manifestUri = models.JSONField(null=True, blank=True)  # {<class 'str'>}
-    source = models.JSONField(null=True, blank=True)  # {<class 'str'>}
-    focus = models.JSONField(null=True, blank=True)  # {<class 'bool'>}
-    disabled = models.JSONField(null=True, blank=True)  # {<class 'bool'>}
-    extraText = models.JSONField(null=True, blank=True)  # {<class 'list'>}
-    certificateUri = models.JSONField(null=True, blank=True)  # {<class 'NoneType'>}
-    description = models.JSONField(null=True, blank=True)  # {<class 'str'>, <class 'NoneType'>}
-    isFeatured = models.JSONField(null=True, blank=True)  # {<class 'bool'>}
-    drm = models.JSONField(null=True, blank=True)  # {<class 'list'>}
-    features = models.JSONField(null=True, blank=True)  # {<class 'list'>}
-    licenseServers = models.JSONField(null=True, blank=True)  # {<class 'dict'>}
-    licenseRequestHeaders = models.JSONField(null=True, blank=True)  # {<class 'dict'>}
-    requestFilter = models.JSONField(null=True, blank=True)  # {<class 'NoneType'>}
-    responseFilter = models.JSONField(null=True, blank=True)  # {<class 'NoneType'>}
-    clearKeys = models.JSONField(null=True, blank=True)  # {<class 'dict'>}
-    extraConfig = models.JSONField(null=True, blank=True)  # {<class 'dict'>, <class 'NoneType'>}
-    adTagUri = models.JSONField(null=True, blank=True)  # {<class 'str'>, <class 'NoneType'>}
-    imaVideoId = models.JSONField(null=True, blank=True)  # {<class 'str'>, <class 'NoneType'>}
-    imaAssetKey = models.JSONField(null=True, blank=True)  # {<class 'str'>, <class 'NoneType'>}
-    imaContentSrcId = models.JSONField(null=True, blank=True)  # {<class 'int'>, <class 'NoneType'>}
-    mimeType = models.JSONField(null=True, blank=True)  # {<class 'NoneType'>}
-    mediaPlaylistFullMimeType = models.JSONField(null=True, blank=True)  # {<class 'str'>, <class 'NoneType'>}
-    storedProgress = models.JSONField(null=True, blank=True)  # {<class 'int'>}
-    storedContent = models.JSONField(null=True, blank=True)  # {<class 'dict'>, <class 'NoneType'>}
+    name = models.CharField(max_length=100, null=True, blank=True)
+    shortName = models.CharField(max_length=100, null=True, blank=True)
+    iconUri = models.CharField(max_length=100, null=True, blank=True)
+    manifestUri = models.CharField(max_length=100, null=True, blank=True)
+    source = models.CharField(max_length=100, null=True, blank=True)
+    focus = models.BooleanField(null=True, blank=True)
+    disabled = models.BooleanField(null=True, blank=True)
+    extraText = models.JSONField(null=True, blank=True)
+    certificateUri = models.JSONField(null=True, blank=True)
+    description = models.JSONField(null=True, blank=True)
+    isFeatured = models.BooleanField(null=True, blank=True)
+    drm = models.JSONField(null=True, blank=True)
+    features = models.JSONField(null=True, blank=True)
+    licenseServers = models.JSONField(null=True, blank=True)
+    licenseRequestHeaders = models.JSONField(null=True, blank=True)
+    requestFilter = models.JSONField(null=True, blank=True)
+    responseFilter = models.JSONField(null=True, blank=True)
+    clearKeys = models.JSONField(null=True, blank=True)
+    extraConfig = models.JSONField(null=True, blank=True)
+    adTagUri = models.JSONField(null=True, blank=True)
+    imaVideoId = models.JSONField(null=True, blank=True)
+    imaAssetKey = models.JSONField(null=True, blank=True)
+    imaContentSrcId = models.JSONField(null=True, blank=True)
+    mimeType = models.JSONField(null=True, blank=True)
+    mediaPlaylistFullMimeType = models.JSONField(null=True, blank=True)
+    storedProgress = models.IntegerField(null=True, blank=True)
+    storedContent = models.JSONField(null=True, blank=True)
 
     class Meta:
         ordering = ['name']

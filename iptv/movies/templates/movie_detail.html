@@ -1,15 +1,51 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-    <meta charset="UTF-8">
-    <title>IPTV</title>
-</head>
-<body>
-<h1>Movie Detail</h1>
+{% extends "base.html" %}
 
-{{ name }}
-<img src="{{ iconUri }}" alt="Icon of {{ name }}">
+{% block content %}
 
-</body>
-</html>
+<div class="container">
+  <h1>{{ name }}</h1>
+</div>
+<br>
+
+<div class="container">
+  <img src="{{ iconUri }}" alt="Icon of {{ name }}">
+</div>
+<br>
+
+<div class="container">
+    <table class="table">
+      <tbody>
+        <tr>
+          <th scope="row">id</th>
+          <td>{{ id }}</td>
+        </tr>
+        <tr>
+          <th scope="row">Short Name</th>
+          <td>{{ shortName }}</td>
+        </tr>
+        <tr>
+          <th scope="row">Source</th>
+          <td>{{ source }}</td>
+        </tr>
+        <tr>
+          <th scope="row">Description</th>
+          <td>{{ description }}</td>
+        </tr>
+        <tr>
+          <th scope="row">Is Featured</th>
+          <td>{{ isFeatured }}</td>
+        </tr>
+        <tr>
+          <th scope="row">Features</th>
+          <td>{{ features }}</td>
+        </tr>
+        <tr>
+          <th scope="row">Stored Progress</th>
+          <td>{{ storedProgress }}</td>
+        </tr>
+
+
+      </tbody>
+    </table>
+</div>
+{% endblock content %}
